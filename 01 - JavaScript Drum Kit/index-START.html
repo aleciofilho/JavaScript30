@@ -76,15 +76,17 @@
   //   this.classList.remove("playing")
   // };
 
-  function removePlaying(event) {
-    if (event.propertyName !== "transform") return;
-    this.classList.remove("playing");
-  }
+  // function removePlaying(event) {
+  //   if (event.propertyName !== "transform") return;
+  //   this.classList.remove("playing");
+  // }
 
   const keys = document.querySelectorAll(".key");
   keys.forEach(key => {
-    key.addEventListener("transitionend", removePlaying)
-    // console.log(key)
+    key.addEventListener("transitionend", (event) => {
+      if (event.propertyName !== "transform") return;
+      this.classList.remove("playing")
+    });
   });
 </script>
 
