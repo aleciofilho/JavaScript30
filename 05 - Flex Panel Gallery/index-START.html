@@ -62,7 +62,6 @@
       margin: 0;
       width: 100%;
       transition: transform 0.5s;
-      border: red 1px solid;
       flex: 1 0 auto;
       display: flex;
       align-items: center;
@@ -124,11 +123,13 @@
 
   <script>
     const panels = document.querySelectorAll(".panel")
+    console.log(panels)
 
     function toggleOpen() {
-      panels.forEach(panel => {
+      Array.from(panels).filter(panel => panel !== this).forEach(panel => {
+        console.log(panel)
         panel.classList.remove('open')
-        panel.classList.remove('open-active')
+        // panel.classList.remove('open-active')
       })
       this.classList.toggle('open')
     }
