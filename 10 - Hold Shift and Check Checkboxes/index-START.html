@@ -105,7 +105,9 @@
       checkboxes.forEach(checkbox => checkbox.checked = false)
       const first = Math.min(checkboxes.indexOf(lastChecked), checkboxes.indexOf(this))
       const last = Math.max(checkboxes.indexOf(lastChecked), checkboxes.indexOf(this))
-      console.log(first, last)
+      checkboxes.slice(first, last + 1).forEach((checkbox) => {
+        checkbox.checked = true
+      })
     } else {
       if (this.checked) {
         lastChecked = this
