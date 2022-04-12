@@ -98,13 +98,28 @@
 <script>
   let lastChecked;
   const checkboxes = Array.from(document.querySelectorAll('.inbox input[type="checkbox"]'))
+  let shiftPressed = false
+  function checkAccordingly(event) {
+    console.log(event.shiftKey)
+    if (event.shiftKey && lastChecked) {
+      console.log("holding shift")
+    } else {
+      if (this.checked) {
+        lastChecked = this
+      }
+    }
+  }
 
   checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener('click', () => {
-      console.log(checkboxes.indexOf(checkbox))
-      lastChecked = checkbox
-    })
+    checkbox.addEventListener('click', checkAccordingly)
   })
+
+  // checkboxes.forEach((checkbox) => {
+  //   checkbox.addEventListener('click', () => {
+  //     // console.log(checkboxes.indexOf(checkbox))
+  //     lastChecked = checkbox
+  //   })
+  // })
 
 </script>
 </body>
