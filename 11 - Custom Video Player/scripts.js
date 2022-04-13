@@ -4,6 +4,7 @@ const playButton = player.querySelector('.toggle')
 const skipButtons = player.querySelectorAll('[data-skip]')
 const sliders = player.querySelectorAll('.player__slider')
 const progress = player.querySelector('.progress__filled')
+const progressBar = player.querySelector('.progress')
 
 const togglePlay = () => {
   if (video.paused) {
@@ -23,9 +24,14 @@ function sliderUpdate() {
   video[this.name] = this.value
 }
 
-function updateProgressBar() {
+const updateProgressBar = () => {
   const percent = (video.currentTime / video.duration) * 100
   progress.style.flexBasis = `${percent}%`
+}
+
+function setProgress(event) {
+  const videoTime = (event.offsetX / progressBar.offsetWidth) * video.duration
+  video.currentTime = videoTime
 }
 
 video.addEventListener('click', togglePlay)
@@ -37,4 +43,14 @@ skipButtons.forEach((button) => {
 sliders.forEach((slider) => {
   slider.addEventListener('change', sliderUpdate)
   slider.addEventListener('mousemove', sliderUpdate)
+})
+progressBar.addEventListener('click', setProgress)
+
+let mouseDown = false
+progressBar.addEventListener('mousedown', () => mouseDown = true)
+progressBar.addEventListener('mouseup', () => mouseDown = false)
+progressBar.addEventListener('mousemove', (event) => {
+  if (mouseDown) {
+    setProgress(event)
+  }
 })
