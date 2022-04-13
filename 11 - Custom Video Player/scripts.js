@@ -13,5 +13,12 @@ const togglePlay = () => {
   }
 }
 
+function skip() {
+  video.currentTime += parseFloat(this.dataset.skip)
+}
+
 video.addEventListener('click', togglePlay)
 playButton.addEventListener('click', togglePlay)
+skipButtons.forEach((button) => {
+  button.addEventListener('click', skip)
+})
